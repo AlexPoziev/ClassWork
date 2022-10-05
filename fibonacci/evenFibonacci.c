@@ -9,7 +9,7 @@ unsigned long int iterationFibonacci(unsigned number) {
     unsigned long int back = 0;
     unsigned long int next = 1;
 
-    for (int i = 1; i < number; ++i) {
+    for (int i = 2; i < number; ++i) {
         unsigned long int temp = next;
         next += back;
         back = temp;
@@ -18,31 +18,37 @@ unsigned long int iterationFibonacci(unsigned number) {
     return next;
 }
 
-short checkForRules(int *number, int fibonacci) {
-    *number = iterationFibonacci(fibonacci);
+int evenFibonacci(void) {
+    const int maxValue = 1000000;
+    int number = 0;
+    int sum = 0;
+    int i = 0;
 
-    if (*number > 1000000) {
-        return -1;
+    while (number < maxValue) {
+        if (number % 2 == 0) {
+            sum +=number;
+        }
+        ++i;
+        number = iterationFibonacci(i);
     }
-    return (*number % 2) ? 0 : 1;
+
+    return sum;
 }
 
 bool correctTestIteration(void) {
-    return !iterationFibonacci(0) && iterationFibonacci(1) == 1 && iterationFibonacci(10) == 55 && iterationFibonacci(25) == 75025;
+    const int rightAnswer = 1089154;
+    int answer = evenFibonacci();
+
+    return answer == rightAnswer;
 }
 //4613732
 int main() {
-    int sum = 0;
-    for (int i = 1; i < 1000; ++i) {
-        int number = iterationFibonacci(i);
-        if (number <= 1000000 && !(number % 2)) {
-            printf("%d \n", number);
-            sum += number;
-        } else if (number > 1000000) {
-            break;
-        }
-
+    if (!correctTestIteration()) {
+        printf("Test failed");
+        return 1;
     }
-    printf("%d", sum);
+
+    printf("Sum of even fibonacci numbers: %d", evenFibonacci());
+
     return 0;
 }
