@@ -34,7 +34,7 @@ bool correctTest() {
 
     evenChooseSort(firstArray, 5);
 
-    return firstArray[0] == 1 && firstArray[2] == 3 && firstArray[4] == 5;
+    return firstArray[0] == 1 && firstArray[1] == 4 && firstArray[2] == 3 && firstArray[3]== 2 && firstArray[4] == 5;
 }
 
 int main() {
