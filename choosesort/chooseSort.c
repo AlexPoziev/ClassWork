@@ -13,7 +13,7 @@ void evenChooseSort(int array[], int size) {
         return;
     }
 
-    for (int i = 0; i < size; i += 2){
+    for (int i = 0; i < size; i += 2) {
         int minIndex = i;
         for (int j = i + 2; j < size; j += 2) {
             int min = array[i];
@@ -22,7 +22,6 @@ void evenChooseSort(int array[], int size) {
                 min = array[j];
                 minIndex = j;
             }
-
         }
         if (i != minIndex) {
             swap(&array[i], &array[minIndex]);
@@ -47,6 +46,10 @@ int main() {
     printf("Input array length: ");
     int size = 0;
     scanf("%d", &size);
+    while (size < 1) {
+        printf("Count of numbers cannot be negative or zero, repeat input: ");
+        scanf("%d", &size);
+    }
 
     int *array = (int*)(calloc(size, sizeof(int)));
     if (array == NULL) {
@@ -57,7 +60,12 @@ int main() {
     printf("Print all numbers by enter: \n");
 
     for (int i = 0; i < size; ++i) {
-        scanf("%d", &array[i]);
+        int isString = scanf("%d", (&array[i]));
+        while (isString == 0) {
+            printf("Entered value is not a number, repeat input: \n");
+            fflush(stdin);
+            isString = scanf("%d", &array[i]);
+        }
     }
 
     evenChooseSort(array, size);
@@ -66,6 +74,8 @@ int main() {
     for (int i = 0; i < size; ++i) {
         printf("%d ", array[i]);
     }
+
+    free(array);
 
     return 0;
 }
