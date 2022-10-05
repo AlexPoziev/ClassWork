@@ -8,7 +8,7 @@ void swap(int *firstNumber, int *secondNumber) {
     *secondNumber = temp;
 }
 
-void EvenChooseSort(int array[], int size) {
+void evenChooseSort(int array[], int size) {
     if (size == 1) {
         return;
     }
@@ -32,9 +32,10 @@ void EvenChooseSort(int array[], int size) {
 
 bool correctTest() {
     int firstArray[5] = {5, 4, 3, 2, 1};
-    int secondArray[1] = {5};
 
+    evenChooseSort(firstArray, 5);
 
+    return firstArray[0] == 1 && firstArray[2] == 3 && firstArray[4] == 5;
 }
 
 int main() {
@@ -49,6 +50,7 @@ int main() {
 
     int *array = (int*)(calloc(size, sizeof(int)));
     if (array == NULL) {
+        printf("Not enough memory");
         return 1;
     }
 
@@ -58,7 +60,7 @@ int main() {
         scanf("%d", &array[i]);
     }
 
-    EvenChooseSort(array, size);
+    evenChooseSort(array, size);
 
     printf("Sorted array: ");
     for (int i = 0; i < size; ++i) {
