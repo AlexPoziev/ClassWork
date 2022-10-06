@@ -29,7 +29,7 @@ void evenChooseSort(int array[], int size) {
     }
 }
 
-bool correctTest() {
+bool correctTest(void) {
     int firstArray[5] = {5, 4, 3, 2, 1};
 
     evenChooseSort(firstArray, 5);
