@@ -10,7 +10,7 @@ int symbolsPrinter(int *array) {
     }
     for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
         if (array[i] > 0) {
-            printf("symbol '%d', %d times \n", i, array[i]);
+            printf("symbol '%c', %d times \n", i, array[i]);
         }
     }
 
