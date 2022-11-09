@@ -14,6 +14,16 @@ bool isPalindrome(char *string) {
     }
 
     while (leftSide < rightSide) {
+        while (leftSide < rightSide && string[leftSide] == ' ') {
+            ++leftSide;
+        }
+        while (leftSide < rightSide && string[rightSide] == ' ') {
+            --rightSide;
+        }
+        if (leftSide >= rightSide) {
+            return true;
+        }
+
         if (string[leftSide] != string[rightSide]) {
             return false;
         }
@@ -30,7 +40,7 @@ bool trueTest(void) {
     bool secondTest = isPalindrome("a");
     bool thirdTest = isPalindrome("abba");
     bool fourthTest = isPalindrome("12521");
-    bool fifthTest = isPalindrome("я иду с мечем судия");
+    bool fifthTest = isPalindrome("aborrow or rob a");
 
     return firstTest && secondTest && thirdTest && fourthTest && fifthTest;
 }
@@ -38,7 +48,7 @@ bool trueTest(void) {
 bool falseTest(void) {
     bool firstTest = isPalindrome("ab");
     bool secondTest = isPalindrome("133");
-    bool thirdTest = isPalindrome("я не иду с мечем судия");
+    bool thirdTest = isPalindrome("borrow and rob");
 
     return !firstTest && !secondTest && !thirdTest;
 }
@@ -61,5 +71,6 @@ int main(void) {
 
     printf("It's %s", isPalindrome(string) ? "a palindrome" : "not a palindrome");
 
+    free()
     return 0;
 }
