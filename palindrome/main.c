@@ -25,6 +25,24 @@ bool isPalindrome(char *string) {
     return true;
 }
 
+bool trueTest(void) {
+    bool firstTest = isPalindrome("");
+    bool secondTest = isPalindrome("a");
+    bool thirdTest = isPalindrome("abba");
+    bool fourthTest = isPalindrome("12521");
+    bool fifthTest = isPalindrome("я иду с мечем судия");
+
+    return firstTest && secondTest && thirdTest && fourthTest && fifthTest;
+}
+
+bool falseTest(void) {
+    bool firstTest = isPalindrome("ab");
+    bool secondTest = isPalindrome("133");
+    bool thirdTest = isPalindrome("я не иду с мечем судия");
+
+    return !firstTest && !secondTest && !thirdTest;
+}
+
 int main(void) {
     if (!trueTest() || !falseTest()) {
         printf("Tests Failed");
