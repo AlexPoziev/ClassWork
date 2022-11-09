@@ -71,6 +71,7 @@ int main(void) {
 
     printf("It's %s", isPalindrome(string) ? "a palindrome" : "not a palindrome");
 
-    free()
+    free(string);
+
     return 0;
 }
