@@ -5,9 +5,32 @@
 #define MAX_LENGTH 1000
 
 int changeRepeats(FILE *file, char *string) {
-    char currentSymbol
+    if (file == NULL) {
+        return 1;
+    }
+    int currentPosition = 0;
+
+    char currentSymbol = (char)fgetc(file);
+    if (currentSymbol == -1) {
+        return 0;
+    }
+
     while (!feof(file)) {
-        fgetc(file)
+        char previousSymbol = currentSymbol;
+        currentSymbol = (char)fgetc(file);
+        if (currentSymbol == -1) {
+            if (string[currentPosition - 1] != previousSymbol) {
+                string[currentPosition] = previousSymbol;
+            }
+            break;
+        }
+        if (currentSymbol != previousSymbol) {
+            string[currentPosition] = previousSymbol;
+            ++currentPosition;
+            if (currentPosition >= 1000) {
+                return -1;
+            }
+        }
     }
 
     return 0;
@@ -29,12 +52,29 @@ int main(void) {
         return -1;
     }
 
+    free(fileName);
+
     char* string = calloc(1000, sizeof(char));
     if (string == NULL) {
         printf("Not enough memory");
-        free(fileName);
         fclose(file);
+
+        return 1;
     }
+
+    int errorCode = changeRepeats(file, string);
+    if (errorCode == -1) {
+        printf("File is too big");
+        free(string);
+        free(file);
+
+        return -1;
+    }
+
+    printf("Final string: %s", string);
+
+    fclose(file);
+    free(string);
 
     return 0;
 }
