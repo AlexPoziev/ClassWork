@@ -46,6 +46,7 @@ bool correctTest(void) {
     changeRepeats(file, test);
     fclose(file);
 
+    int check = strcmp(test, "afgba");
     return !strcmp(test, "afgba");
 }
 
@@ -57,21 +58,15 @@ int main(void) {
 
     printf("Print file name with name length less than 20 and which contains less than 1000 symbol: ");
 
-    char *fileName = calloc(20, sizeof(char));
-    if (fileName == NULL) {
-        printf("Not enough memory");
-        return 1;
-    }
+    char fileName[20] = {0};
+
     scanf("%s", fileName);
 
     FILE *file = fopen(fileName, "r");
     if (file == NULL) {
         printf("File with this name doesn't exist");
-        free(fileName);
         return -1;
     }
-
-    free(fileName);
 
     char* string = calloc(MAX_LENGTH, sizeof(char));
     if (string == NULL) {
