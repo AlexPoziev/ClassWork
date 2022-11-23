@@ -1,13 +1,11 @@
 #pragma once
+
 #include <stdbool.h>
 
 typedef struct Tree Tree;
 
 // create dictionary, need to check for NULL
 Tree* createTree(void);
-
-// add value to tree
-int addValue(Tree *tree, int value);
 
 // sort array by creating tree
 // return 1 if not enough memory
@@ -17,4 +15,7 @@ int addValue(Tree *tree, int value);
 int sortArrayByTree(int *array, unsigned int arraySize, Tree *tree);
 
 // deallocate dictionary's memory
-void deleteTree(Tree **dictionary);
+void deleteTree(Tree **tree);
+
+// test functions of binaryTree
+bool treeTest(void);

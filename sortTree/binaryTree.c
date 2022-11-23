@@ -13,6 +13,9 @@ typedef struct Tree {
     Node *root;
 } Tree;
 
+// add value to tree
+int addValue(Tree *tree, int value);
+
 Tree* createTree(void) {
     Tree *temp = malloc(sizeof(Tree));
     temp->root = NULL;
@@ -136,4 +139,53 @@ void deleteTree(Tree **dictionary) {
 
     free(*dictionary);
     *dictionary = NULL;
+}
+
+bool createTreeTest(void) {
+    Tree *tree = createTree();
+
+    bool test = tree != NULL;
+
+    deleteTree(&tree);
+
+    return test;
+}
+
+bool deleteTreeTest(void) {
+    Tree *tree = createTree();
+
+    bool firstTest = tree != NULL;
+
+    deleteTree(&tree);
+
+    bool secondTest = tree == NULL;
+
+    return firstTest && secondTest;
+}
+
+bool sortArrayByTreeTest(void) {
+    Tree *tree = createTree();
+    if (tree == NULL) {
+        return false;
+    }
+
+    int array[6] = {5, 4, 3, 2, 2, 1};
+
+    sortArrayByTree(array, 6, tree);
+
+    bool firstTest = array[0] == 1;
+    bool secondTest = array[1] == 2;
+    bool thirdTest = array[2] == 2;
+    bool fourthTest = array[3] == 3;
+    bool fifthTest = array[4] == 4;
+    bool sixthTest = array[5] == 5;
+
+    deleteTree(&tree);
+
+    return firstTest && secondTest && thirdTest && fourthTest
+        && fifthTest && sixthTest;
+}
+
+bool treeTest(void) {
+    return createTreeTest() && sortArrayByTreeTest() && deleteTreeTest();
 }

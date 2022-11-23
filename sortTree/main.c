@@ -3,17 +3,50 @@
 #include <stdio.h>
 
 int main() {
+    if (!treeTest()) {
+        printf("Tests Failed");
+        return 1;
+    }
+
     Tree *tree = createTree();
+    if (tree == NULL) {
+        printf("Not enough memory");
+        return 1;
+    }
 
-    int *array = calloc(5, sizeof(int));
-    array[0] = 5;
-    array[1] = 5;
-    array[2] = 5;
-    array[3] = 5;
-    array[4] = 1;
+    printf("Input array size more than 0: ");
+    unsigned int arraySize = 0;
+    scanf("%u", &arraySize);
 
+    int *array = calloc(arraySize, sizeof(int));
+    if (array == NULL) {
+        printf("Not enough memory");
+        deleteTree(&tree);
 
-    sortArrayByTree(array, 5, tree);
+        return 1;
+    }
+
+    printf("Input values of array by enter: \n");
+    for (int i = 0; i < arraySize; ++i) {
+        scanf("%d", &array[i]);
+    }
+
+    int errorCode = sortArrayByTree(array, arraySize, tree);
+    if (errorCode == 1) {
+        printf("Not enough memory");
+        free(array);
+        deleteTree(&tree);
+
+        return 1;
+    }
+
+    printf("Sorted array: ");
+    for (int i = 0; i < arraySize; ++i) {
+        printf("%d ", array[i]);
+    }
+
+    deleteTree(&tree);
+    free(array);
 
     return 0;
 }
