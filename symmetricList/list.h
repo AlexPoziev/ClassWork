@@ -19,3 +19,7 @@ int getListFromFile(char *fileName, List *list);
 // return true if list symmetric
 // return false if list not symmetric
 bool isSymmetric(List *list);
+
+// test all list functions
+// return false if some test failed
+bool listTest(void);
