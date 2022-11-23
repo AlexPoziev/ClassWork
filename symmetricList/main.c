@@ -20,6 +20,8 @@ int main() {
     int errorCode = getListFromFile("test.txt", list);
     if (errorCode == -1) {
         printf("No file with this name exists");
+        deleteList(&list);
+        
         return 0;
     }
     if (errorCode == 1) {
