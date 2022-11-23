@@ -19,6 +19,51 @@ Tree* createTree(void) {
     return temp;
 }
 
+int buildTreeFromArray(int *array, unsigned int arraySize, Tree *tree) {
+    for (int i = 0; i < arraySize; ++i) {
+        int errorCode = addValue(tree, array[i]);
+        if (errorCode) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+// put (sorted) data from tree to array
+void putTreeToArray(int* array, Node *child, unsigned int *currentNumber) {
+    if (child == NULL) {
+        return;
+    }
+
+    putTreeToArray(array, child->leftChild, currentNumber);
+
+    array[*currentNumber] = child->value;
+    ++(*currentNumber);
+
+    putTreeToArray(array, child->rightChild, currentNumber);
+}
+
+int sortArrayByTree(int *array, unsigned int arraySize, Tree *tree) {
+    if (array == NULL || tree == NULL) {
+        return -1;
+    }
+
+    if (arraySize <= 0) {
+        return -2;
+    }
+
+    int errorCode = buildTreeFromArray(array, arraySize, tree);
+    if (errorCode == 1) {
+        return 1;
+    }
+
+    unsigned int currentNumber = 0;
+    putTreeToArray(array, tree->root, &currentNumber);
+
+    return 0;
+}
+
 Node* findPosition(Tree *tree, int value) {
     Node *currentNode = tree->root;
     if (currentNode->value == value) {
@@ -62,9 +107,14 @@ int addValue(Tree *tree, int value) {
     newNode->rightChild = NULL;
     newNode->leftChild = NULL;
 
-    newNode->value <= currentNode->value
-    ? (currentNode->leftChild = newNode)
-    : (currentNode->rightChild = newNode);
+    if (newNode->value == currentNode->value) {
+        newNode->leftChild = currentNode->leftChild;
+        currentNode->leftChild = newNode;
+    } else {
+        newNode->value < currentNode->value
+        ? (currentNode->leftChild = newNode)
+        : (currentNode->rightChild = newNode);
+    }
 
     return 0;
 }
@@ -76,7 +126,7 @@ void deleteTreeRecursion(Node *child) {
 
     deleteTreeRecursion(child->leftChild);
     deleteTreeRecursion(child->rightChild);
-    
+
     free(child);
     child = NULL;
 }

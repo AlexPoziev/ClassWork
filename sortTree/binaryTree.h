@@ -9,11 +9,12 @@ Tree* createTree(void);
 // add value to tree
 int addValue(Tree *tree, int value);
 
-// get data from file and put in into binary tree
-int buildTreeFromArray(int* array, Tree *tree);
-
-// put (sorted) data from tree to array
-int putTreeToArray(int* array, Tree *tree);
+// sort array by creating tree
+// return 1 if not enough memory
+// return -1 if array or tree are NULL
+// return -2 if arraySize less or equal zero
+// return 0 if all is ok
+int sortArrayByTree(int *array, unsigned int arraySize, Tree *tree);
 
 // deallocate dictionary's memory
 void deleteTree(Tree **dictionary);
