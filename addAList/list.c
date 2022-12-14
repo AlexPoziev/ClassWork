@@ -102,6 +102,77 @@ void addAStartedToEnd(List *list, int *errorCode) {
     }
 }
 
-bool addAStartedToEndTest(void) {
+// ========================================Tests==================================================
 
+bool createListTest(void) {
+    List* list = createList();
+    if (list == NULL) {
+        return false;
+    }
+
+    bool result = list != NULL;
+    deleteList(&list, false);
+
+    return result;
+}
+
+
+bool deleteListTest(void) {
+    List *list = createList();
+    if (list == NULL) {
+        return false;
+    }
+
+    putToLastPosition(list, "Warian");
+    putToLastPosition(list, "Thrall");
+    bool firstTest = list != NULL;
+    deleteList(&list, true);
+    bool secondTest = list == NULL;
+
+    return firstTest && secondTest;
+}
+
+bool putToLastPositionTest(void) {
+    List* list = createList();
+    if (list == NULL) {
+        return false;
+    }
+
+    putToLastPosition(list, "1");
+    bool firstTest = !strcmp(list->lastElement->string, "1");
+    putToLastPosition(list, "2");
+    bool secondTest = !strcmp(list->lastElement->string, "2");
+
+    deleteList(&list, true);
+
+    return firstTest && secondTest;
+}
+
+bool addAStartedToEndTest(void) {
+    List *list = createList();
+    if (list == NULL) {
+        return false;
+    }
+
+    putToLastPosition(list, "abc");
+    putToLastPosition(list, "bbc");
+
+    int errorCode = 0;
+    addAStartedToEnd(list, &errorCode);
+
+    bool firstTest = !strcmp(list->lastElement->string, "abc");
+
+    addAStartedToEnd(list, &errorCode);
+
+    bool secondTest = !strcmp(list->lastElement->string, "abc");
+    bool thirdTest = !strcmp(list->head->next->next->next->string, "abc");
+
+    deleteList(&list, true);
+
+    return firstTest && secondTest && thirdTest;
+}
+
+bool listTest(void) {
+    return createListTest() && deleteListTest()
+            && addAStartedToEndTest() && putToLastPositionTest();
 }

@@ -2,6 +2,11 @@
 #include "list.h"
 
 int main() {
+    if (!listTest()) {
+        printf("Tests Failed");
+        return 1;
+    }
+
     List *list = createList();
     if (list == NULL) {
         printf("Not enough memory");

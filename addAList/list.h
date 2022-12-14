@@ -20,4 +20,4 @@ void deleteList(List **list, bool isAllocated);
 // add all string that starting by 'a' to the end of list
 void addAStartedToEnd(List *list, int *errorCode);
 
-bool addAStartedToEndTest(void);
+bool listTest(void);
