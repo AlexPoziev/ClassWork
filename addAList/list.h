@@ -1,10 +1,6 @@
 #pragma once
 
 #include <stdbool.h>
-#include <stdio.h>
-
-// pointer to list element
-typedef struct ListElement ListElement;
 
 typedef struct List List;
 
@@ -18,6 +14,13 @@ int putToLastPosition(List *list, char* string);
 void deleteList(List **list, bool isAllocated);
 
 // add all string that starting by 'a' to the end of list
+// errorCode gets values:
+// 1 if not enough memory
+// -1 if pointer to list is NULL
 void addAStartedToEnd(List *list, int *errorCode);
 
+// test of all list functions
 bool listTest(void);
+
+// print list in a row
+void printList(List *list);

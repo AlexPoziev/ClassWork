@@ -1,6 +1,7 @@
 #include "list.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef struct ListElement {
     char* string;
@@ -99,6 +100,18 @@ void addAStartedToEnd(List *list, int *errorCode) {
         if (*errorCode) {
             return;
         }
+    }
+}
+
+void printList(List *list) {
+    if (list == NULL) {
+        return;
+    }
+
+    ListElement *temp = list->head;
+    while (temp != NULL) {
+        printf("%s ", temp->string);
+        temp = temp->next;
     }
 }
 
