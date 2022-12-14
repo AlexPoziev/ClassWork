@@ -14,10 +14,7 @@ typedef struct List {
 } List;
 
 List* createList(void) {
-    List *temp = malloc(sizeof(List));
-    temp->head = NULL;
-
-    return temp;
+    return calloc(1, sizeof(List));
 }
 
 int putToLastPosition(List *list, char* string) {
@@ -82,7 +79,7 @@ void addAStartedToEnd(List *list, int *errorCode) {
         return;
     }
 
-    ListElement *currentTemp= list->head;
+    ListElement *currentTemp = list->head;
 
     while (currentTemp != lastPosition) {
         if (currentTemp->string != NULL && currentTemp->string[0] == 'a') {
