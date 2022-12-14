@@ -18,16 +18,19 @@ int main() {
     errorCode = putToLastPosition(list, "abc");
     if (errorCode) {
         printf("Not enough memory");
+        deleteList(&list, true);
         return 1;
     }
     errorCode = putToLastPosition(list, "bbc");
     if (errorCode) {
         printf("Not enough memory");
+        deleteList(&list, true);
         return 1;
     }
     errorCode = putToLastPosition(list, "ac");
     if (errorCode) {
         printf("Not enough memory");
+        deleteList(&list, true);
         return 1;
     }
 
@@ -37,6 +40,7 @@ int main() {
     addAStartedToEnd(list, &errorCode);
     if (errorCode == 1) {
         printf("Not enough memory");
+        deleteList(&list, true);
         return 1;
     }
 
