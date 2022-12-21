@@ -12,6 +12,7 @@ int main() {
     char email[100] = {0};
     scanf("%s", email);
 
-    printf("String %s e-mail address", isEmailAddress(email) ? "is" : "isn't")
+    printf("String %s e-mail address", isEmailAddress(email) ? "is" : "isn't");
+
     return 0;
 }
